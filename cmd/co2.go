@@ -45,6 +45,7 @@ var co2Cmd = &cobra.Command{
 
 		if len(args) > 0 {
 			fmt.Println(cmd.UsageString())
+			return nil
 		}
 
 		printCo2Level(netatmoClient.GetStationData())
@@ -56,19 +57,8 @@ var co2Cmd = &cobra.Command{
 func printCo2Level(stationData netatmo2.StationData) {
 	fmt.Println("Station name: ", stationData.Body.Devices[0].StationName)
 	fmt.Println("Co2:", chalk.Green, stationData.Body.Devices[0].DashboardData.CO2, "ppm", chalk.Reset)
-
 }
 
 func init() {
 	rootCmd.AddCommand(co2Cmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// co2Cmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// co2Cmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
